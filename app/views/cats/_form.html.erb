@@ -1,3 +1,4 @@
+<%= render "shared/errors", :obj => cat %>
 <form action="<%= cat.persisted? ? cat_url(cat) : cats_url %>" method="post">
 	<% if cat.persisted?  %>
 		<input type="hidden" name="_method" value="put" />
