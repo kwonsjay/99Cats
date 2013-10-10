@@ -36,5 +36,4 @@ class CatsController < ApplicationController
       render :edit
     end
   end
-
 end

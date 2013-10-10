@@ -3,7 +3,11 @@ class Cat < ActiveRecord::Base
   validates :age, :birth_date, :color, :name, :sex, :presence => true
   validates :age, numericality: { only_integer: true }
 
-  validates :color, inclusion: { in: %w(black white calico red),
+  def self.available_colors
+    ["black", "white", "calico", "red"]
+  end
+
+  validates :color, inclusion: { in: Cat.available_colors,
       message: "%{value} is not a valid color" }
 
   validates :sex, inclusion: { in: %w(m f),

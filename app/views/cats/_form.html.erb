@@ -20,10 +20,9 @@
 
 	<label for="cat_color" >Color:</label>
 	<select id="cat_color" name="cat[color]">
-		<option value="black" <%= color_selected('black', cat.color) %>>Black</option>
-		<option value="white" <%= color_selected('white', cat.color) %>>White</option>
-		<option value="calico" <%= color_selected('calico', cat.color) %>>Calico</option>
-		<option value="red" <%= color_selected('red', cat.color) %>>Red</option>
+		<% Cat.available_colors.each do |color| %>
+			<option value="<%= color %>" <%= color_selected(color, cat.color) %>><%= color.capitalize %></option>
+		<% end %>
 	</select>
 	<br>
 

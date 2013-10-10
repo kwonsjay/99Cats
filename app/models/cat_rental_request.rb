@@ -11,17 +11,39 @@ class CatRentalRequest < ActiveRecord::Base
 
   belongs_to :cat
 
-  def overlapping_requests
-    overlapping_results = CatRentalRequest.where(<<-SQL, self.cat_id, self.start_date, self.end_date)
-      cat_id = ? AND (start_date <= ? AND end_date >= ?)
-    SQL
-  end
-
-  def overlapping_approved_requests
-    overlapping_results = overlapping_requests.where("status = 'APPROVED'")
-
-    if !overlapping_results.all.empty? && overlapping_results.first.id != self.id
-      errors[:base] = "Overlapping approved requests"
+  def approve!
+    self.status = 'APPROVED'
+    self.transaction do
+      self.save!
+      overlapping_pending_requests.update_all(:status => "DENIED")
     end
   end
+
+  def deny!
+    self.status = 'DENIED'
+    self.save
+  end
+
+  def pending?
+    self.status == 'PENDING'
+  end
+
+  private
+    def overlapping_requests
+      overlapping_results = CatRentalRequest.where(<<-SQL, self.cat_id, self.start_date, self.end_date)
+        cat_id = ? AND (start_date <= ? AND end_date >= ?)
+      SQL
+    end
+
+    def overlapping_pending_requests
+      overlapping_requests.where("status = 'PENDING'")
+    end
+
+    def overlapping_approved_requests
+      overlapping_results = overlapping_requests.where("status = 'APPROVED'")
+
+      if !overlapping_results.all.empty? && overlapping_results.first.id != self.id
+        errors[:base] = "Overlapping approved requests"
+      end
+    end
 end
