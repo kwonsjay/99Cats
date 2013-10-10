@@ -1,0 +1,8 @@
+<% @cats.each do |cat| %>
+
+<ul>
+	<li>Name: <%= link_to cat.name, cat_url(cat) %> </li>
+</ul>
+
+<% end %>
+<%= link_to "New cat", new_cat_url %>
