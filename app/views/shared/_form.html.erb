@@ -1,0 +1,12 @@
+<h1><%= title%></h1>
+<form action="<%= action%>" method="post" accept-charset="utf-8">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <label for="user_user_name">User Name</label>
+    <input type="text" id="user_user_name" name="user[user_name]">
+
+    <label for="user_password">User Password</label>
+    <input type="password" id="user_password" name="user[password]">
+
+    <p><input type="submit" value="<%= label%>"></p>
+</form>
