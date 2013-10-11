@@ -31,7 +31,7 @@ class CatRentalRequest < ActiveRecord::Base
 
   private
     def overlapping_requests
-      overlapping_results = CatRentalRequest.where(<<-SQL, self.cat_id, self.start_date, self.end_date)
+      overlapping_results = CatRentalRequest.where(<<-SQL, self.cat_id, self.end_date, self.start_date)
         cat_id = ? AND (start_date <= ? AND end_date >= ?)
       SQL
     end
