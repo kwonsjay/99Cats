@@ -15,7 +15,8 @@ class CatRentalRequest < ActiveRecord::Base
     self.status = 'APPROVED'
     self.transaction do
       self.save!
-      overlapping_pending_requests.update_all(:status => "DENIED")
+
+      self.overlapping_pending_requests.update_all(:status => "DENIED")
     end
   end
 
