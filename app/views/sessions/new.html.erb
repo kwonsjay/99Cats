@@ -1,0 +1,13 @@
+<!-- <h1>Log In</h1>
+<form action="<%= session_url%>" method="post" accept-charset="utf-8">
+
+    <label for="user_user_name">User Name</label>
+    <input type="text" id="user_user_name" name="user[user_name]">
+
+    <label for="user_password">User Password</label>
+    <input type="password" id="user_password" name="user[password]">
+
+    <p><input type="submit" value="Log In"></p>
+</form> -->
+
+<%= render "shared/form", :action => session_url, :label => "Log In", :title => "Log In"%>

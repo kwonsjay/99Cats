@@ -6,6 +6,9 @@ NinetyNineCats::Application.routes.draw do
       put :deny
     end
   end
-  
-  root :to => "/cats"
+
+  resources :users, :only => [:new, :create]
+  resource :session, :only => [:new, :create, :destroy]
+
+  # root :to => "cats#index"
 end
