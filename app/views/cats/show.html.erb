@@ -16,7 +16,9 @@
 		</tr>
 	</tbody>
 </table>
-<%= button_to "Edit Cat", edit_cat_url(@cat), :method => :get %>
+<% if logged_in? && @cat.user_id == current_user.id %>
+    <%= button_to "Edit Cat", edit_cat_url(@cat), :method => :get %>
+<% end %>
 
 <h2>Rental Requests</h2>
 <% @cat.rental_requests.order("start_date").each do |request| %>
@@ -24,7 +26,7 @@
 Start Date: <%= date_formatter(request.start_date) %><br>
 End Date: <%= date_formatter(request.end_date) %><br>
 Status: <%= request.status %><br>
-<% if request.pending?%>
+<% if logged_in? && request.pending? && @cat.user_id == current_user.id %>
 <%= button_to "Approve", approve_cat_rental_request_url(request), :method => :put  %>
 <%= button_to "Deny", deny_cat_rental_request_url(request), :method => :put  %>
 <% end %>

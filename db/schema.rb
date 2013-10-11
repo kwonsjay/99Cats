@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131011201522) do
+ActiveRecord::Schema.define(:version => 20131011210129) do
 
   create_table "cat_rental_requests", :force => true do |t|
     t.integer  "cat_id",     :null => false
@@ -20,9 +20,11 @@ ActiveRecord::Schema.define(:version => 20131011201522) do
     t.string   "status",     :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   add_index "cat_rental_requests", ["cat_id"], :name => "index_cat_rental_requests_on_cat_id"
+  add_index "cat_rental_requests", ["user_id"], :name => "index_cat_rental_requests_on_user_id"
 
   create_table "cats", :force => true do |t|
     t.integer  "age",                     :null => false
@@ -32,7 +34,10 @@ ActiveRecord::Schema.define(:version => 20131011201522) do
     t.string   "sex",        :limit => 1, :null => false
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+    t.integer  "user_id"
   end
+
+  add_index "cats", ["user_id"], :name => "index_cats_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "user_name",       :null => false

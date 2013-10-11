@@ -5,6 +5,11 @@ class SessionsController < ApplicationController
   end
 
   def create
+    puts "Remote IP: #{request.remote_ip}"
+    request.env.each do |key, value|
+      puts "#{key}: #{value}"
+    end
+
     if login_user!
       redirect_to cats_url
     else

@@ -9,7 +9,8 @@ module SessionsHelper
 
   def login_user!
     @current_user = User.find_by_credentials(params[:user][:user_name], params[:user][:password])
-    session[:session_token] = current_user.reset_session_token!
+    return false if @current_user.nil?
+    session[:session_token] = current_user.session_token
 
     @current_user != nil
   end

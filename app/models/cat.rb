@@ -1,6 +1,6 @@
 class Cat < ActiveRecord::Base
   attr_accessible :age, :birth_date, :color, :name, :sex
-  validates :age, :birth_date, :color, :name, :sex, :presence => true
+  validates :age, :birth_date, :color, :name, :sex, :user_id, :presence => true
   validates :age, numericality: { only_integer: true }
 
   def self.available_colors
@@ -12,7 +12,7 @@ class Cat < ActiveRecord::Base
 
   validates :sex, inclusion: { in: %w(m f),
       message: "%{value} is not a valid gender" }
-  
+
   before_validation do
     self.color.downcase!
     self.sex.downcase!
@@ -23,4 +23,6 @@ class Cat < ActiveRecord::Base
            :primary_key => :id,
            :foreign_key => :cat_id,
            :dependent => :destroy
+
+  belongs_to :user
 end

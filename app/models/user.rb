@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
 
   validates :user_name, :password_digest, :presence => true
 
+  has_many :cats
+
+  has_many :cat_rental_requests
+
   before_validation do
     self.session_token ||= reset_session_token!
   end

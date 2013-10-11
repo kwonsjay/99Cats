@@ -1,7 +1,7 @@
 class CatRentalRequest < ActiveRecord::Base
   attr_accessible :cat_id, :start_date, :end_date, :status
 
-  validates :cat_id, :start_date, :end_date, :status, :presence => true
+  validates :cat_id, :start_date, :end_date, :status, :user_id, :presence => true
 
   validate :overlapping_approved_requests
 
@@ -10,6 +10,8 @@ class CatRentalRequest < ActiveRecord::Base
   end
 
   belongs_to :cat
+
+  belongs_to :user
 
   def approve!
     self.status = 'APPROVED'
