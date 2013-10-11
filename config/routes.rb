@@ -6,5 +6,6 @@ NinetyNineCats::Application.routes.draw do
       put :deny
     end
   end
-
+  
+  root :to => "/cats"
 end
