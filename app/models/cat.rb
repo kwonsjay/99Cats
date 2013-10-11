@@ -12,6 +12,11 @@ class Cat < ActiveRecord::Base
 
   validates :sex, inclusion: { in: %w(m f),
       message: "%{value} is not a valid gender" }
+  
+  before_validation do
+    self.color.downcase!
+    self.sex.downcase!
+  end
 
   has_many :rental_requests,
            :class_name => "CatRentalRequest",
