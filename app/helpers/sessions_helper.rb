@@ -22,7 +22,7 @@ module SessionsHelper
       :remote_ip => request.remote_ip,
       :user_agent => request.env['HTTP_USER_AGENT'],
       :status => "ACTIVE",
-      :location => request.remote_ip
+      :location => (request.location.city || request.remote_ip)
     }
   end
 end
