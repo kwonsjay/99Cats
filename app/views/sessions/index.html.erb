@@ -1,0 +1,22 @@
+<form action="<%= session_url%>" method="post" accept-charset="utf-8">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="delete">
+    <table>
+        <tr>
+            <th></th>
+            <th>Remote IP</th>
+            <th>Location</th>
+            <th>User Agent</th>
+        </tr>
+    <% @sessions.each do |session| %>
+        <tr>
+            <th><input type="checkbox" name="sessions[]" value="<%= session.id %>"></th>
+            <th><%= session.remote_ip %></th>
+            <th><%= session.location %></th>
+            <th><%= session.computer %></th>
+        </tr>
+    <% end %>
+    </table>
+
+    <p><input type="submit" value="Logout"></p>
+</form>

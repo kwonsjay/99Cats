@@ -3,6 +3,9 @@ class CatsController < ApplicationController
 
   def index
     @cats = Cat.all
+
+    @location = request.location
+
     render :index
   end
 
